@@ -8,7 +8,7 @@
     $color-back calc(100% - ($base-size + $base-radius))
   );
   > main {
-    padding: 0 calc($base-size / 2) calc($base-size / 2 + $base-radius);
+    padding: calc($base-size / 2);
     background-color: $color-fore;
     border-radius: $base-radius $base-radius 0 0;
     display: flex;
@@ -141,6 +141,7 @@
       grid-template-columns: 50px 1fr 50px;
       align-items: center;
       justify-items: center;
+      position: relative;
       > button {
         width: $base-size;
         height: $base-size;
@@ -155,6 +156,18 @@
         max-height: 15em;
         resize: none;
         justify-self: normal;
+        border-radius: calc($base-radius / 3);
+        margin: calc(($base-size - 21px) / 2) 0;
+      }
+
+      >.char_counter {
+        position: absolute;
+        display: block;
+        right: $base-size + 8px;
+        bottom: -1px;
+        font-size: calc($base-size / 4);
+        line-height: calc($base-size / 4);
+        user-select: none;
       }
     }
   }

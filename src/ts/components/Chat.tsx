@@ -102,14 +102,15 @@ function Chat() {
             <>
               <Header title="オープンチャット" />
               <main
-              ref={main}
+                ref={main}
                 onScroll={(e) => {
                   const { clientHeight, scrollHeight, scrollTop } =
                     e.currentTarget
-                  //上端までスクロールしたら
-                  console.log(scrollTop)
-
-                  if (scrollHeight - (clientHeight - scrollTop) == 0 && !oldChatLog["1"]) {
+                  //上端までスクロールしたら&&id1番のチャットが読み込まれていない場合&&過去ログがある場合
+                  if (
+                    scrollHeight - (clientHeight - scrollTop) == 0 &&
+                    !oldChatLog["1"] && Object.keys(oldChatLog).length
+                  ) {
                     oldChatLogTop.current = scrollTop
                     loadOffset.current += 30
                     getLog(

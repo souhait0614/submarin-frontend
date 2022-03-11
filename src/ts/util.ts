@@ -14,3 +14,7 @@ export function genUuid() {
   }
   return chars.join("")
 }
+
+export function byteLengthOf(s: string) {
+  return new Blob([s]).size
+}

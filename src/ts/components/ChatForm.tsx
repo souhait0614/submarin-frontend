@@ -48,21 +48,25 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
 
   const post = () => {
     if (text.trim() === "" && images.length === 0) return
-    postChat(
-      {
-        ip,
-        poster_identifier: poster_identifier,
-        type: 0,
-        name,
-        avatar,
-        content: text,
-        images,
-      },
-      ws
-    )
-    setText("")
-    textareaRef.current.value = ""
-    setImages([])
+    try {
+      postChat(
+        {
+          ip,
+          poster_identifier: poster_identifier,
+          type: 0,
+          name,
+          avatar,
+          content: text.trim(),
+          images,
+        },
+        ws
+      )
+      setText("")
+      textareaRef.current.value = ""
+      setImages([])
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -79,6 +83,7 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
                     result.splice(k, 1)
                     return result
                   })
+                  textareaRef.current.focus()
                 }}
               >
                 <i>close</i>
@@ -90,13 +95,20 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
       </div>
       <div className="input">
         <Ripple>
-          <button onClick={convertImages}>
+          <button
+            onClick={() => {
+              convertImages()
+              textareaRef.current.focus()
+            }}
+            disabled={images.length >= 4}
+          >
             <i>add_photo_alternate</i>
           </button>
         </Ripple>
         <TextareaAutosize
           placeholder="いまどうしてる？"
           ref={textareaRef}
+          maxLength={2000}
           onChange={(e) => setText(e.currentTarget.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) post()
@@ -104,12 +116,18 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
         />
         <Ripple>
           <button
-            onClick={post}
+            onClick={() => {
+              post()
+              textareaRef.current.focus()
+            }}
             disabled={text.trim() === "" && images.length === 0}
           >
             <i>send</i>
           </button>
         </Ripple>
+        <span className="char_counter">
+          {text.trim().length} / 2000
+        </span>
       </div>
     </footer>
   )

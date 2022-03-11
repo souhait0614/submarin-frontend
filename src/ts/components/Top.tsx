@@ -76,21 +76,40 @@ function Top() {
               className="img"
               role="img"
             />
-            <Ripple>
-              <button className="btn" onClick={changeAvatar}>
-                <i>add_photo_alternate</i>
-              </button>
-            </Ripple>
+            {avatar === "../img/default-avatar.png" ? (
+              <Ripple>
+                <button className="btn" onClick={changeAvatar}>
+                  <i>add_photo_alternate</i>
+                </button>
+              </Ripple>
+            ) : (
+              <Ripple>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setAvatar("../img/default-avatar.png")
+                    localStorage.removeItem("avatar")
+                  }}
+                >
+                  <i>delete_forever</i>
+                </button>
+              </Ripple>
+            )}
           </div>
           <input
             type="text"
             maxLength={20}
             onChange={(e) => {
               let count =
-                20 - (e.currentTarget.value.trim().match(/[^\x01-\x7E\xA1-\xDF]/g) || []).length
+                20 -
+                (
+                  e.currentTarget.value
+                    .trim()
+                    .match(/[^\x01-\x7E\xA1-\xDF]/g) || []
+                ).length
               count < 10 && (count = 10)
               e.currentTarget.maxLength = count
-              changeName(e.currentTarget.value.trim().substring(0,count))
+              changeName(e.currentTarget.value.trim().substring(0, count))
             }}
             value={name}
             placeholder="username..."
