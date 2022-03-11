@@ -8,11 +8,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rmwc/ripple": "^7.0.3",
+    "@rmwc/tooltip": "^7.0.3",
+    "@types/react-transition-group": "^4.4.4",
+    "compressorjs": "^1.1.1",
+    "pica": "^9.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.1"
+    "react-image-crop": "^9.1.1",
+    "react-router-dom": "^6.2.1",
+    "react-textarea-autosize": "^8.3.3",
+    "react-transition-group": "^4.4.2",
+    "recoil": "^0.6.1",
+    "use-file-picker": "^1.4.1"
   },
   "devDependencies": {
+    "@types/pica": "^9.0.0",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",

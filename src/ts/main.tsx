@@ -1,14 +1,17 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
-import App from "./App"
+import App from "./components/App"
 import "../css/style.scss"
+import "@material/ripple/dist/mdc.ripple.css"
+import "@rmwc/tooltip/tooltip.css"
+import { RecoilRoot } from "recoil"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <RecoilRoot>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </RecoilRoot>
+  </BrowserRouter>,
   document.getElementById("root")
 )
