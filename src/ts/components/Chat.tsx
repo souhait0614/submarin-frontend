@@ -55,7 +55,7 @@ function Chat() {
         } else if (messageType === "set-log") {
           const json = JSON.parse(data.join(">"))
           setOldChatLog((prev) => (prev = { ...prev, ...json }))
-          main.current.scrollTop = oldChatLogTop
+          main.current.scrollTop = oldChatLogTop.current
         }
       }
 
@@ -109,7 +109,7 @@ function Chat() {
                   //上端までスクロールしたら
                   console.log(scrollTop)
 
-                  if (scrollHeight - (clientHeight - scrollTop) == 0) {
+                  if (scrollHeight - (clientHeight - scrollTop) == 0 && !oldChatLog["1"]) {
                     oldChatLogTop.current = scrollTop
                     loadOffset.current += 30
                     getLog(
