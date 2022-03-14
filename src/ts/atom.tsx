@@ -2,6 +2,14 @@ import { atom } from "recoil"
 import { Settings } from "./types"
 import { genUuid } from "./util"
 
+try {
+  localStorage.getItem("access_test")
+} catch (error) {
+  alert(
+    "Local Storageへのアクセスに失敗しました。\nChromeをお使いの場合、設定 > セキュリティとプライバシー > Cookie と他のサイトデータから「すべての Cookie をブロックする」をオフにしてください。"
+  )
+}
+
 export const avatarState = atom({
   key: "avatar",
   default: localStorage.getItem("avatar") || "",

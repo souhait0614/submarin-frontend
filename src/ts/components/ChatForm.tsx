@@ -1,7 +1,9 @@
 import { useState, useRef, memo } from "react"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import {
   avatarState,
+  imageViewerOpenState,
+  imageViewerState,
   nameState,
   posterIdentifierState,
   settingsState,
@@ -20,18 +22,23 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
   const poster_identifier = useRecoilValue(posterIdentifierState)
   const settings = useRecoilValue(settingsState)
 
+  const setImageViewer = useSetRecoilState(imageViewerState)
+  const setImageViewerOpen = useSetRecoilState(imageViewerOpenState)
+
   const [text, setText] = useState("")
   const [images, setImages] = useState<string[]>([] as string[])
   const textareaRef = useRef(null)
 
   const convertImages = () => {
+    const fileType = ["image/png", "image/jpeg", "image/gif"]
     const fileElem = document.createElement("input")
     fileElem.type = "file"
-    fileElem.accept = ".png,.jpeg,.jpg,.gif"
+    fileElem.accept = fileType.join()
     fileElem.click()
     fileElem.addEventListener("change", function () {
       const { files } = this
       if (files === null) return
+      if (!fileType.includes(files[0].type)) return
       for (const file of files) {
         new Compressor(file, {
           maxWidth: 1080,
@@ -96,7 +103,16 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
                 <i>close</i>
               </button>
             </Ripple>
-            <img src={image} />
+            <Ripple>
+              <button
+                onClick={() => {
+                  setImageViewer([images, k])
+                  setImageViewerOpen(true)
+                }}
+              >
+                <img src={image} />
+              </button>
+            </Ripple>
           </div>
         ))}
       </div>
@@ -116,6 +132,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
           placeholder="いまどうしてる？"
           ref={textareaRef}
           maxLength={2000}
+          autoFocus
           onChange={(e) => setText(e.currentTarget.value)}
           onKeyDown={(e) => {
             if (

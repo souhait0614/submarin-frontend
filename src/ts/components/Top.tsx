@@ -17,15 +17,17 @@ const Top = memo(() => {
   const settings: Settings = useRecoilValue(settingsState)
 
   function changeAvatar() {
+    const fileType = ["image/png", "image/jpeg", "image/gif"]
     const fileElem = document.createElement("input")
     fileElem.type = "file"
-    fileElem.accept = ".png,.jpeg,.jpg,.gif"
+    fileElem.accept = fileType.join()
     fileElem.click()
     fileElem.addEventListener(
       "change",
       function () {
         const { files } = this
         if (files === null) return
+        if (!fileType.includes(files[0].type)) return
         const img = new Image()
         const reader = new FileReader()
         reader.addEventListener("load", () => {

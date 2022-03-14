@@ -11,12 +11,6 @@
         "licenseUrl": "https://github.com/jamesmfriedman/rmwc",
         "parents": "submarin-frontend"
     },
-    "@types/react-transition-group@4.4.4": {
-        "licenses": "MIT",
-        "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
-        "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
-        "parents": "submarin-frontend"
-    },
     "cjp@1.2.3": {
         "licenses": "MIT",
         "repository": "https://github.com/Submarinonline/cjp.js",

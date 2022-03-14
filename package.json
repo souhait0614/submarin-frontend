@@ -11,7 +11,6 @@
   "dependencies": {
     "@rmwc/ripple": "^7.0.3",
     "@rmwc/tooltip": "^7.0.3",
-    "@types/react-transition-group": "^4.4.4",
     "cjp": "^1.2.3",
     "compressorjs": "^1.1.1",
     "pica": "^9.0.1",
@@ -31,6 +30,7 @@
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/react-modal": "^3.13.1",
+    "@types/react-transition-group": "^4.4.4",
     "@vitejs/plugin-react": "^1.0.7",
     "sass": "^1.49.8",
     "typescript": "^4.5.4",

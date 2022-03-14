@@ -17,7 +17,6 @@ Modal.defaultStyles = {
 }
 
 const App = memo(() => {
-
   const location = useLocation()
   const navigate = useNavigate()
   useEffect(() => {

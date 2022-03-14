@@ -99,6 +99,7 @@
       padding: calc($base-size / 8) calc($base-size / 4);
       background-color: $color-back-mute;
       border-radius: $base-radius;
+      white-space: pre;
 
       &.pri {
         color: #fff;
@@ -143,11 +144,16 @@
         margin: calc($base-size / 4 - 3px) 0;
         position: relative;
 
-        > img {
+        > button {
           width: 100%;
           height: 100%;
-          object-fit: cover;
           border-radius: $base-radius;
+          > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: $base-radius;
+          }
         }
 
         > .remove {
@@ -161,6 +167,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          z-index: 1;
           > i {
             line-height: normal;
           }
@@ -183,7 +190,7 @@
         align-items: center;
         align-self: end;
         &:disabled {
-          color:$color-text-mute
+          color: $color-text-mute;
         }
       }
 

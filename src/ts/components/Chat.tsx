@@ -277,7 +277,7 @@ const Chat = memo(() => {
         </header>
         <div className="settings_container">
           <SettingItem
-            label="怪しい日本語に変換して送信"
+            label="怪レい日本语に変換して送信"
             input={
               <Switch
                 checked={settings.chat_cjp}
