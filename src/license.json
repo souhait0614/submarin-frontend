@@ -47,13 +47,19 @@
         "licenseUrl": "https://github.com/DominicTobias/react-image-crop/raw/master/LICENSE.md",
         "parents": "submarin-frontend"
     },
+    "react-images-viewer@1.7.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/guonanci/react-images-viewer",
+        "licenseUrl": "https://github.com/guonanci/react-images-viewer/raw/master/LICENSE",
+        "parents": "submarin-frontend"
+    },
     "react-modal@3.14.4": {
         "licenses": "MIT",
         "repository": "https://github.com/reactjs/react-modal",
         "licenseUrl": "https://github.com/reactjs/react-modal/raw/master/LICENSE",
         "parents": "submarin-frontend"
     },
-    "react-router-dom@6.2.1": {
+    "react-router-dom@6.2.2": {
         "licenses": "MIT",
         "repository": "https://github.com/remix-run/react-router",
         "licenseUrl": "https://github.com/remix-run/react-router/raw/master/LICENSE.md",
@@ -83,7 +89,7 @@
         "licenseUrl": "https://github.com/facebookexperimental/Recoil/raw/master/LICENSE",
         "parents": "submarin-frontend"
     },
-    "use-file-picker@1.4.1": {
+    "use-file-picker@1.4.2": {
         "licenses": "MIT",
         "repository": "https://github.com/Jaaneek/useFilePicker",
         "licenseUrl": "https://github.com/Jaaneek/useFilePicker/raw/master/LICENSE",
