@@ -1,9 +1,9 @@
-@use "var" as *;
+@use "./Var" as *;
 
-#settings {
+#open_source_license {
+  overflow-y: auto;
   > main {
-    padding: 0 calc($base-size / 2);
-
+    padding: 0 calc($base-size / 2) calc($base-size / 2);
     > .container {
       background-color: $color-fore;
       padding: 0 calc($base-size / 4);

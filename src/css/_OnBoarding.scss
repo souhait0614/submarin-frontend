@@ -1,0 +1,30 @@
+@use "./Var" as *;
+
+#onboarding {
+  > main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: calc($base-size / 2);
+    > section {
+      width: min(627px, 100%);
+      text-align: center;
+      > h2 {
+        display: none;
+      }
+      > .logo {
+        width: 90%;
+        display: block;
+        margin: 0 auto;
+      }
+      > p {
+        margin: 2rem 0;
+        line-height: 1.5rem;
+      }
+    }
+  }
+  > footer {
+    margin: calc($base-size / 2);
+    margin-top: 0;
+  }
+}

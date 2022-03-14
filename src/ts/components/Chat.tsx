@@ -6,15 +6,18 @@ import {
   avatarState,
   settingsState,
 } from "../atom"
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { OldChatLog, PostChat, ReceiveChat, Settings } from "../types"
+import { OldChatLog, ReceiveChat, Settings } from "../types"
 import Error from "./Error"
 import ChatList from "./ChatList"
 import ChatForm from "./ChatForm"
 import { getLog, postChat } from "../sendWebSocket"
+import { Ripple } from "@rmwc/ripple"
+import Modal from "react-modal"
 
-function Chat() {
+const Chat = memo(() => {
+
   const navigate = useNavigate()
   const [wsLoading, setWsLoading] = useState(true)
 
@@ -25,12 +28,15 @@ function Chat() {
 
   const [oldChatLog, setOldChatLog] = useState({} as OldChatLog)
   const [receiveChat, setReceiveChat] = useState([] as ReceiveChat[])
+  const [hideJumpBtn, setHideJumpBtn] = useState(true)
+
+  const [backModalOpen, setBackModalOpen] = useState(false)
 
   const ws = useRef<WebSocket>()
   const ip = useRef<string>("0.0.0.0")
   const loadOffset = useRef<number>(0)
 
-  const main = useRef(null)
+  const main = useRef<HTMLElement>(null)
   const oldChatLogTop = useRef<number>(0)
 
   useEffect(() => {
@@ -47,8 +53,6 @@ function Chat() {
       ws.current.onmessage = (receive) => {
         const data = (receive.data as string).split(">")
         const messageType = data.splice(0, 1)[0]
-        // console.log(messageType);
-        // console.log(JSON.parse(data.join("")));
         if (messageType === "receive-chat") {
           const json = JSON.parse(data.join(">"))
           setReceiveChat((prev) => (prev = [...prev, json]))
@@ -100,16 +104,28 @@ function Chat() {
         <>
           {!wsLoading ? (
             <>
-              <Header title="オープンチャット" />
+              <Header
+                title="オープンチャット"
+                backBtn={
+                  <Ripple>
+                    <button onClick={() => setBackModalOpen(true)}>
+                      <i>arrow_back</i>
+                    </button>
+                  </Ripple>
+                }
+              />
               <main
                 ref={main}
                 onScroll={(e) => {
                   const { clientHeight, scrollHeight, scrollTop } =
                     e.currentTarget
+                  setHideJumpBtn(scrollTop === 0)
+
                   //上端までスクロールしたら&&id1番のチャットが読み込まれていない場合&&過去ログがある場合
                   if (
-                    scrollHeight - (clientHeight - scrollTop) == 0 &&
-                    !oldChatLog["1"] && Object.keys(oldChatLog).length
+                    scrollHeight - (clientHeight - scrollTop) <= 1 &&
+                    !oldChatLog["1"] &&
+                    Object.keys(oldChatLog).length
                   ) {
                     oldChatLogTop.current = scrollTop
                     loadOffset.current += 30
@@ -122,6 +138,15 @@ function Chat() {
                 }}
               >
                 <ChatList oldChatLog={oldChatLog} chatLog={receiveChat} />
+                <Ripple>
+                  <button
+                    className={"jump_latest" + (hideJumpBtn ? " hide" : "")}
+                    title="最新のチャットに戻る"
+                    onClick={() => (main.current.scrollTop = 0)}
+                  >
+                    <i>arrow_downward</i>
+                  </button>
+                </Ripple>
               </main>
               <ChatForm ws={ws.current} ip={ip.current} />
             </>
@@ -144,8 +169,43 @@ function Chat() {
           />
         </>
       )}
+      <Modal
+        isOpen={backModalOpen}
+        onRequestClose={() => setBackModalOpen(false)}
+        overlayClassName={{
+          base: "overlay_base",
+          afterOpen: "overlay_after",
+          beforeClose: "overlay_before",
+        }}
+        className={{
+          base: "content_base",
+          afterOpen: "content_after",
+          beforeClose: "content_before",
+        }}
+        closeTimeoutMS={100}
+      >
+        <div className="message">
+          <p>オープンチャットから退出しますか？</p>
+        </div>
+        <div className="modal_buttons">
+          <Ripple>
+            <button onClick={() => setBackModalOpen(false)}>キャンセル</button>
+          </Ripple>
+          <Ripple>
+            <button
+              className="destructive"
+              onClick={() => {
+                setBackModalOpen(false)
+                navigate(-1)
+              }}
+            >
+              退出
+            </button>
+          </Ripple>
+        </div>
+      </Modal>
     </div>
   )
-}
+})
 
 export default Chat

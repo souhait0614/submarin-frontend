@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, memo } from "react"
 import { useRecoilValue } from "recoil"
 import { avatarState, nameState, posterIdentifierState } from "../atom"
 import { postChat } from "../sendWebSocket"
@@ -7,7 +7,8 @@ import Compressor from "compressorjs"
 import TextareaAutosize from "react-textarea-autosize"
 import { Ripple } from "@rmwc/ripple"
 
-function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
+const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
+
   const avatar = useRecoilValue(avatarState)
   const name = useRecoilValue(nameState)
   const poster_identifier = useRecoilValue(posterIdentifierState)
@@ -65,7 +66,7 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
       textareaRef.current.value = ""
       setImages([])
     } catch (error) {
-      console.log(error)
+
     }
   }
 
@@ -125,12 +126,10 @@ function ChatForm({ ws, ip }: { ws: WebSocket; ip: string }) {
             <i>send</i>
           </button>
         </Ripple>
-        <span className="char_counter">
-          {text.trim().length} / 2000
-        </span>
+        <span className="char_counter">{text.trim().length} / 2000</span>
       </div>
     </footer>
   )
-}
+})
 
 export default ChatForm

@@ -1,6 +1,9 @@
-@use "App";
-@use "RTG";
+@use "./App";
+@use "./RTG";
+@use "./ReactModal";
 
-@use "Top";
-@use "Settings";
-@use "Chat";
+@use "./Top";
+@use "./Settings";
+@use "./Chat";
+@use "./OnBoarding";
+@use "./OpenSourceLicense"

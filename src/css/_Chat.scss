@@ -1,4 +1,4 @@
-@use "var" as *;
+@use "./Var" as *;
 
 #chat {
   background-image: linear-gradient(
@@ -92,6 +92,26 @@
       &.pri {
         color: #fff;
         background-color: $color-accent;
+      }
+    }
+
+    >.jump_latest {
+      position: fixed;
+      right: calc($base-size / 2);
+      bottom: calc($base-size * 1.5);
+      width: $base-size;
+      height: $base-size;
+      background-color: $color-back-mute;
+      border-radius: $base-radius;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      transition: opacity $transition-time ease-in-out;
+
+      &.hide {
+        opacity: 0;
+        pointer-events: none;
       }
     }
   }

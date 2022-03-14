@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react"
+import React, { ChangeEventHandler, memo } from "react"
 import Header from "./Header"
 import SettingItem from "./SettingItem"
 import { useRecoilState, useRecoilValue } from "recoil"
@@ -9,6 +9,8 @@ import {
   posterIdentifierState,
 } from "../atom"
 import { Settings as typesSettings } from "../types.d"
+import { Ripple } from "@rmwc/ripple"
+import { Link } from "react-router-dom"
 
 function Switch({
   checked,
@@ -27,7 +29,8 @@ function Switch({
   )
 }
 
-function Settings() {
+const Settings = memo(() => {
+
   const avatar = useRecoilValue(avatarState)
   const name = useRecoilValue(nameState)
   const poster_identifier = useRecoilValue(posterIdentifierState)
@@ -96,7 +99,9 @@ function Settings() {
               <>
                 投稿者識別子をブラウザに保存
                 <br />
-                <span className="sub_text">過去に投稿したユーザーかの判別に使用します</span>
+                <span className="sub_text">
+                  過去に投稿したユーザーかの判別に使用します
+                </span>
               </>
             }
             input={
@@ -119,9 +124,25 @@ function Settings() {
             }
           />
         </div>
+        <div className="container">
+          <div className="item_container">
+            <Ripple>
+              <Link className="item" to="/onboarding">
+                <span>初回起動画面を表示</span>
+              </Link>
+            </Ripple>
+          </div>
+          <div className="item_container">
+            <Ripple>
+              <Link className="item" to="/opensouceliecnse">
+                <span>オープンソースライセンス</span>
+              </Link>
+            </Ripple>
+          </div>
+        </div>
       </main>
     </div>
   )
-}
+})
 
 export default Settings

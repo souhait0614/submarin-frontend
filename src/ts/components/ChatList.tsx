@@ -2,6 +2,7 @@ import { OldChat, OldChatLog } from "../types"
 import ChatNormalPost from "./ChatNormalPost"
 import { ReceiveChat } from "../types.d"
 import ChatLogPost from "./ChatLogPost"
+import { memo } from "react"
 
 function createList(v: ReceiveChat, k: number) {
   if (v.type === 0) {
@@ -10,13 +11,14 @@ function createList(v: ReceiveChat, k: number) {
     return <ChatLogPost chat={v} key={k} />
   }
 }
-function ChatList({
+const ChatList = memo(({
   oldChatLog,
   chatLog,
 }: {
   oldChatLog: OldChatLog
   chatLog: ReceiveChat[]
-}) {
+}) => {
+
   const oldChatArray: OldChat[] = []
   Object.entries(oldChatLog).forEach(([k, v]) => {
     if (
@@ -27,13 +29,13 @@ function ChatList({
       return
     oldChatArray[k] = v
   })
-  // console.log(chatLog.reverse())
+  //
   return (
     <>
       {chatLog.map(createList).reverse()}
       {oldChatArray.filter(Boolean).map(createList).reverse()}
     </>
   )
-}
+})
 
 export default ChatList

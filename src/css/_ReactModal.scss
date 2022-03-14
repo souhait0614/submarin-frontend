@@ -1,0 +1,70 @@
+@use "./Var" as *;
+
+.overlay_base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0005;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity $transition-time ease-out;
+}
+.overlay_after {
+  opacity: 1;
+}
+.overlay_before {
+  opacity: 0;
+}
+
+.content_base {
+  padding: calc($base-size / 4);
+  border-radius: $base-radius;
+  background-color: $color-fore;
+  display: flex;
+  flex-direction: column;
+  gap: calc($base-size / 4);
+  transition: opacity $transition-time ease-out;
+
+  > .message {
+    padding: calc($base-size / 4);
+    min-height: $base-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  > .modal_buttons {
+    display: flex;
+    align-items: center;
+    gap: calc($base-size / 4);
+
+    &::before {
+      content: "";
+      height: calc($base-size / 2);
+      border: 0.5px solid $color-separate;
+    }
+
+    > button {
+      flex: 1;
+      height: $base-size;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: $color-accent;
+      border-radius: $base-radius;
+
+      &.destructive {
+        color: $color-accent-alt;
+      }
+
+      &:nth-last-of-type(2) {
+        order: -1;
+      }
+    }
+  }
+}

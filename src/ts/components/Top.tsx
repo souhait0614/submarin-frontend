@@ -5,8 +5,10 @@ import Header from "./Header"
 import { nameState, avatarState, settingsState } from "../atom"
 import { Settings } from "../types.d"
 import { Ripple } from "@rmwc/ripple"
+import { memo } from "react"
 
-function Top() {
+const Top = memo(() => {
+
   const [avatar, setAvatar] = useRecoilState(avatarState)
   const [name, setName] = useRecoilState(nameState)
 
@@ -128,6 +130,6 @@ function Top() {
       </footer>
     </div>
   )
-}
+})
 
 export default Top

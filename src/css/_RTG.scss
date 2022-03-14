@@ -1,15 +1,17 @@
+@use "./Var" as *;
+
 .fade-enter {
   opacity: 0;
   z-index: 1;
 }
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 100ms ease-out;
+  transition: opacity $transition-time ease-out;
 }
 .fade-exit {
   opacity: 1;
 }
 .fade-exit.fade-exit-active {
   opacity: 0;
-  transition: opacity 100ms ease-out;
+  transition: opacity $transition-time ease-out;
 }
