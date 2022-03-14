@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, memo } from "react"
+import React, { ChangeEventHandler, memo, useState } from "react"
 import Header from "./Header"
 import SettingItem from "./SettingItem"
 import { useRecoilState, useRecoilValue } from "recoil"
@@ -11,6 +11,7 @@ import {
 import { Settings as typesSettings } from "../types.d"
 import { Ripple } from "@rmwc/ripple"
 import { Link } from "react-router-dom"
+import ReactModal from "react-modal"
 
 function Switch({
   checked,
@@ -30,12 +31,13 @@ function Switch({
 }
 
 const Settings = memo(() => {
-
   const avatar = useRecoilValue(avatarState)
   const name = useRecoilValue(nameState)
   const poster_identifier = useRecoilValue(posterIdentifierState)
 
   const [settings, setSettings] = useRecoilState(settingsState)
+
+  const [resetDialogOpen, setResetDialogOpen] = useState(false)
 
   const onChangeHandle = (
     changeSetting: string,
@@ -124,6 +126,31 @@ const Settings = memo(() => {
             }
           />
         </div>
+
+        <div className="container">
+          <SettingItem
+            label="怪しい日本語に変換して送信"
+            input={
+              <Switch
+                checked={settings.chat_cjp}
+                onChange={(e) =>
+                  onChangeHandle("chat_cjp", e.currentTarget.checked)
+                }
+              />
+            }
+          />
+          <SettingItem
+            label="Ctrl+Enterで送信"
+            input={
+              <Switch
+                checked={settings.chat_send_shortcut}
+                onChange={(e) =>
+                  onChangeHandle("chat_send_shortcut", e.currentTarget.checked)
+                }
+              />
+            }
+          />
+        </div>
         <div className="container">
           <div className="item_container">
             <Ripple>
@@ -140,7 +167,58 @@ const Settings = memo(() => {
             </Ripple>
           </div>
         </div>
+        <div className="container">
+          <div className="item_container">
+            <Ripple>
+              <button className="item" onClick={() => setResetDialogOpen(true)}>
+                <span>保存された情報を削除</span>
+              </button>
+            </Ripple>
+          </div>
+        </div>
       </main>
+
+      <ReactModal
+        isOpen={resetDialogOpen}
+        onRequestClose={() => setResetDialogOpen(false)}
+        overlayClassName={{
+          base: "overlay_base",
+          afterOpen: "overlay_after",
+          beforeClose: "overlay_before",
+        }}
+        className={{
+          base: "dialog_base",
+          afterOpen: "dialog_after",
+          beforeClose: "dialog_before",
+        }}
+        closeTimeoutMS={100}
+      >
+        <div className="message">
+          <p>
+            ユーザーネームやアバター、設定を削除します。
+            <br />
+            よろしいですか？
+          </p>
+        </div>
+        <div className="modal_buttons">
+          <Ripple>
+            <button onClick={() => setResetDialogOpen(false)}>
+              キャンセル
+            </button>
+          </Ripple>
+          <Ripple>
+            <button
+              className="destructive"
+              onClick={() => {
+                localStorage.clear()
+                location.reload()
+              }}
+            >
+              削除
+            </button>
+          </Ripple>
+        </div>
+      </ReactModal>
     </div>
   )
 })

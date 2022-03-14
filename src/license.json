@@ -17,6 +17,12 @@
         "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
         "parents": "submarin-frontend"
     },
+    "cjp@1.2.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Submarinonline/cjp.js",
+        "licenseUrl": "https://github.com/Submarinonline/cjp.js",
+        "parents": "submarin-frontend"
+    },
     "compressorjs@1.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/fengyuanchen/compressorjs",
@@ -39,6 +45,12 @@
         "licenses": "ISC",
         "repository": "https://github.com/DominicTobias/react-image-crop",
         "licenseUrl": "https://github.com/DominicTobias/react-image-crop/raw/master/LICENSE.md",
+        "parents": "submarin-frontend"
+    },
+    "react-modal@3.14.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/reactjs/react-modal",
+        "licenseUrl": "https://github.com/reactjs/react-modal/raw/master/LICENSE",
         "parents": "submarin-frontend"
     },
     "react-router-dom@6.2.1": {

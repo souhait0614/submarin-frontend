@@ -1,17 +1,24 @@
 import { useState, useRef, memo } from "react"
 import { useRecoilValue } from "recoil"
-import { avatarState, nameState, posterIdentifierState } from "../atom"
+import {
+  avatarState,
+  nameState,
+  posterIdentifierState,
+  settingsState,
+} from "../atom"
 import { postChat } from "../sendWebSocket"
 
 import Compressor from "compressorjs"
 import TextareaAutosize from "react-textarea-autosize"
 import { Ripple } from "@rmwc/ripple"
 
-const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
+import { generate } from "cjp"
 
+const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
   const avatar = useRecoilValue(avatarState)
   const name = useRecoilValue(nameState)
   const poster_identifier = useRecoilValue(posterIdentifierState)
+  const settings = useRecoilValue(settingsState)
 
   const [text, setText] = useState("")
   const [images, setImages] = useState<string[]>([] as string[])
@@ -49,6 +56,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
 
   const post = () => {
     if (text.trim() === "" && images.length === 0) return
+    const sendText = settings.chat_cjp ? generate(text.trim()) : text.trim()
     try {
       postChat(
         {
@@ -57,7 +65,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
           type: 0,
           name,
           avatar,
-          content: text.trim(),
+          content: sendText,
           images,
         },
         ws
@@ -65,9 +73,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
       setText("")
       textareaRef.current.value = ""
       setImages([])
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }
 
   return (
@@ -112,7 +118,12 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
           maxLength={2000}
           onChange={(e) => setText(e.currentTarget.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) post()
+            if (
+              e.key === "Enter" &&
+              (e.ctrlKey || e.metaKey) &&
+              settings.chat_send_shortcut
+            )
+              post()
           }}
         />
         <Ripple>

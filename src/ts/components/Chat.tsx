@@ -1,12 +1,14 @@
 import Header from "./Header"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   posterIdentifierState,
   nameState,
   avatarState,
   settingsState,
+  imageViewerOpenState,
+  imageViewerState,
 } from "../atom"
-import { memo, useEffect, useRef, useState } from "react"
+import { ChangeEventHandler, memo, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { OldChatLog, ReceiveChat, Settings } from "../types"
 import Error from "./Error"
@@ -15,22 +17,28 @@ import ChatForm from "./ChatForm"
 import { getLog, postChat } from "../sendWebSocket"
 import { Ripple } from "@rmwc/ripple"
 import Modal from "react-modal"
+import ImgsViewer from "react-images-viewer"
+import SettingItem from "./SettingItem"
 
 const Chat = memo(() => {
-
   const navigate = useNavigate()
   const [wsLoading, setWsLoading] = useState(true)
 
   const avatar = useRecoilValue(avatarState)
   const name = useRecoilValue(nameState)
   const poster_identifier = useRecoilValue(posterIdentifierState)
-  const settings: Settings = useRecoilValue(settingsState)
+
+  const [settings, setSettings] = useRecoilState(settingsState)
+  const [imageViewer, setImageViewer] = useRecoilState(imageViewerState)
+  const [imageViewerOpen, setImageViewerOpen] =
+    useRecoilState(imageViewerOpenState)
 
   const [oldChatLog, setOldChatLog] = useState({} as OldChatLog)
   const [receiveChat, setReceiveChat] = useState([] as ReceiveChat[])
   const [hideJumpBtn, setHideJumpBtn] = useState(true)
 
-  const [backModalOpen, setBackModalOpen] = useState(false)
+  const [backDialogOpen, setBackDialogOpen] = useState(false)
+  const [chatSettingModalOpen, setChatSettingModalOpen] = useState(false)
 
   const ws = useRef<WebSocket>()
   const ip = useRef<string>("0.0.0.0")
@@ -38,6 +46,39 @@ const Chat = memo(() => {
 
   const main = useRef<HTMLElement>(null)
   const oldChatLogTop = useRef<number>(0)
+
+  function Switch({
+    checked,
+    onChange,
+  }: {
+    checked: boolean
+    onChange: ChangeEventHandler<HTMLInputElement>
+  }) {
+    return (
+      <input
+        type="checkbox"
+        className="switch"
+        checked={checked}
+        onChange={onChange}
+      />
+    )
+  }
+
+  const onChangeHandle = (
+    changeSetting: string,
+    value: unknown,
+    callback: Function = () => {}
+  ) => {
+    const result = {
+      ...settings,
+      [changeSetting]: value,
+    }
+    setSettings(result)
+
+    localStorage.setItem("settings", JSON.stringify(result))
+
+    callback(result)
+  }
 
   useEffect(() => {
     const f = async () => {
@@ -95,6 +136,8 @@ const Chat = memo(() => {
         ws.current
       )
       ws.current.close()
+      setImageViewer([[], 0])
+      setImageViewerOpen(false)
     }
   }, [])
 
@@ -108,10 +151,15 @@ const Chat = memo(() => {
                 title="オープンチャット"
                 backBtn={
                   <Ripple>
-                    <button onClick={() => setBackModalOpen(true)}>
+                    <button onClick={() => setBackDialogOpen(true)}>
                       <i>arrow_back</i>
                     </button>
                   </Ripple>
+                }
+                addBtn={
+                  <button onClick={() => setChatSettingModalOpen(true)}>
+                    <i>settings</i>
+                  </button>
                 }
               />
               <main
@@ -170,17 +218,17 @@ const Chat = memo(() => {
         </>
       )}
       <Modal
-        isOpen={backModalOpen}
-        onRequestClose={() => setBackModalOpen(false)}
+        isOpen={backDialogOpen}
+        onRequestClose={() => setBackDialogOpen(false)}
         overlayClassName={{
           base: "overlay_base",
           afterOpen: "overlay_after",
           beforeClose: "overlay_before",
         }}
         className={{
-          base: "content_base",
-          afterOpen: "content_after",
-          beforeClose: "content_before",
+          base: "dialog_base",
+          afterOpen: "dialog_after",
+          beforeClose: "dialog_before",
         }}
         closeTimeoutMS={100}
       >
@@ -189,13 +237,13 @@ const Chat = memo(() => {
         </div>
         <div className="modal_buttons">
           <Ripple>
-            <button onClick={() => setBackModalOpen(false)}>キャンセル</button>
+            <button onClick={() => setBackDialogOpen(false)}>キャンセル</button>
           </Ripple>
           <Ripple>
             <button
               className="destructive"
               onClick={() => {
-                setBackModalOpen(false)
+                setBackDialogOpen(false)
                 navigate(-1)
               }}
             >
@@ -204,6 +252,74 @@ const Chat = memo(() => {
           </Ripple>
         </div>
       </Modal>
+      <Modal
+        isOpen={chatSettingModalOpen}
+        onRequestClose={() => setChatSettingModalOpen(false)}
+        overlayClassName={{
+          base: "overlay_base",
+          afterOpen: "overlay_after",
+          beforeClose: "overlay_before",
+        }}
+        className={{
+          base: "modal_base",
+          afterOpen: "modal_after",
+          beforeClose: "modal_before",
+        }}
+        closeTimeoutMS={100}
+      >
+        <header>
+          <span>チャット設定</span>
+          <Ripple>
+            <button onClick={() => setChatSettingModalOpen(false)}>
+              <i>close</i>
+            </button>
+          </Ripple>
+        </header>
+        <div className="settings_container">
+          <SettingItem
+            label="怪しい日本語に変換して送信"
+            input={
+              <Switch
+                checked={settings.chat_cjp}
+                onChange={(e) =>
+                  onChangeHandle("chat_cjp", e.currentTarget.checked)
+                }
+              />
+            }
+          />
+          <SettingItem
+            label="Ctrl+Enterで送信"
+            input={
+              <Switch
+                checked={settings.chat_send_shortcut}
+                onChange={(e) =>
+                  onChangeHandle("chat_send_shortcut", e.currentTarget.checked)
+                }
+              />
+            }
+          />
+        </div>
+      </Modal>
+      <ImgsViewer
+        imgs={imageViewer[0].map((src) => {
+          return { src }
+        })}
+        currImg={imageViewer[1]}
+        isOpen={imageViewerOpen}
+        onClickPrev={() =>
+          setImageViewer((prev) => (prev = [prev[0], prev[1] - 1]))
+        }
+        onClickNext={() =>
+          setImageViewer((prev) => (prev = [prev[0], prev[1] + 1]))
+        }
+        onClose={() => setImageViewerOpen(false)}
+        backdropCloseable={true}
+        theme={{
+          container: {
+            background: "#0005",
+          },
+        }}
+      />
     </div>
   )
 })

@@ -12,11 +12,13 @@
     "@rmwc/ripple": "^7.0.3",
     "@rmwc/tooltip": "^7.0.3",
     "@types/react-transition-group": "^4.4.4",
+    "cjp": "^1.2.3",
     "compressorjs": "^1.1.1",
     "pica": "^9.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-image-crop": "^9.1.1",
+    "react-images-viewer": "^1.7.1",
     "react-modal": "^3.14.4",
     "react-router-dom": "^6.2.1",
     "react-textarea-autosize": "^8.3.3",
@@ -32,6 +34,7 @@
     "@vitejs/plugin-react": "^1.0.7",
     "sass": "^1.49.8",
     "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "vite": "^2.8.0",
+    "vite-plugin-html": "^3.1.0"
   }
 }

@@ -1,9 +1,19 @@
-import { useRecoilValue } from "recoil"
-import { posterIdentifierState } from "../atom"
+import { Ripple } from "@rmwc/ripple"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import {
+  imageViewerOpenState,
+  imageViewerState,
+  posterIdentifierState,
+} from "../atom"
 import { ReceiveChat } from "../types.d"
+//@ts-ignore
+import defaultAvatar from "../../img/default-avatar.png"
 
 function ChatNormalPost({ chat }: { chat: ReceiveChat }) {
   const poster_identifier = useRecoilValue(posterIdentifierState)
+
+  const setImageViewer = useSetRecoilState(imageViewerState)
+  const setImageViewerOpen = useSetRecoilState(imageViewerOpenState)
 
   return (
     <div
@@ -12,7 +22,9 @@ function ChatNormalPost({ chat }: { chat: ReceiveChat }) {
       }
     >
       <div
-        style={{ backgroundImage: `url(${chat.avatar || "../../img/default-avatar.png"})` }}
+        style={{
+          backgroundImage: `url(${chat.avatar || defaultAvatar})`,
+        }}
         className="img"
         role="img"
       />
@@ -27,7 +39,16 @@ function ChatNormalPost({ chat }: { chat: ReceiveChat }) {
         {chat.images.length ? (
           <div className="images_container">
             {chat.images.map((image, key) => (
-              <img src={image} key={key} />
+              <Ripple key={key}>
+                <button
+                  onClick={() => {
+                    setImageViewer([chat.images, key])
+                    setImageViewerOpen(true)
+                  }}
+                >
+                  <img src={image} />
+                </button>
+              </Ripple>
             ))}
           </div>
         ) : (

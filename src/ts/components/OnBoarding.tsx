@@ -3,6 +3,9 @@ import { memo } from "react"
 import { Link } from "react-router-dom"
 import Header from "./Header"
 
+//@ts-ignore
+import logo from "../../img/logo_color.png"
+
 const OnBoarding = memo(() => {
 
   return (
@@ -13,7 +16,7 @@ const OnBoarding = memo(() => {
           <h2>Submarinへようこそ</h2>
           <img
             className="logo"
-            src="../../img/logo_color.png"
+            src={logo}
             alt="Submarin logo"
           />
           <span style={{ fontSize: "1.5rem" }}>へようこそ。</span>

@@ -46,6 +46,7 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: $color-separate transparent;
+  outline-color: $color-accent;
 }
 :where(html, body, #root, #root > div) {
   width: 100%;

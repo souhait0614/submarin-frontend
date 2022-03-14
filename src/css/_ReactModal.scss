@@ -20,14 +20,13 @@
   opacity: 0;
 }
 
-.content_base {
+.dialog_base {
   padding: calc($base-size / 4);
   border-radius: $base-radius;
   background-color: $color-fore;
   display: flex;
   flex-direction: column;
   gap: calc($base-size / 4);
-  transition: opacity $transition-time ease-out;
 
   > .message {
     padding: calc($base-size / 4);
@@ -35,6 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   > .modal_buttons {
@@ -64,6 +64,67 @@
 
       &:nth-last-of-type(2) {
         order: -1;
+      }
+    }
+  }
+}
+
+.modal_base {
+  border-radius: $base-radius;
+  background-color: $color-fore;
+  width: min(400px, 100%);
+  height: min(300px, 100%);
+  display: grid;
+  grid-template-rows: 50px 1fr;
+
+  > header {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    align-items: center;
+    border-bottom: 1px solid $color-separate;
+    > span {
+      margin-left: calc($base-size / 4);
+    }
+    > button {
+      width: $base-size;
+      height: $base-size;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  > .settings_container {
+    padding: 0 calc($base-size / 4);
+    > .item_container {
+      padding: calc($base-size / 8) 0;
+      position: relative;
+      &:nth-of-type(n + 2)::after {
+        content: "";
+        display: block;
+        width: calc(100% - $base-size / 2);
+        height: 1px;
+        position: absolute;
+        top: calc(($base-size / 32) * -1 + 0.5px);
+        left: calc($base-size / 4);
+        background-color: $color-separate;
+      }
+      > .item {
+        min-height: $base-size;
+        padding: 0 calc($base-size / 4);
+        border-radius: $base-radius;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        user-select: none;
+        position: relative;
+        cursor: pointer;
+
+        > span > .sub_text {
+          font-size: 0.7em;
+          line-height: 0.7em;
+          opacity: 0.7;
+        }
       }
     }
   }

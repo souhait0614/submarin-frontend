@@ -70,12 +70,23 @@
           flex-wrap: wrap;
           gap: calc($base-size / 4);
           justify-self: normal;
-          > img {
-            width: calc(50% - $base-size / 8);
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
+          > button {
+            width: 100%;
             border-radius: $base-radius;
+            @media screen and(min-width:450px) {
+              width: calc(50% - $base-size / 8);
+            }
+            @media screen and(min-width:900px) {
+              width: calc((100% - ($base-size / 4) * 3) / 4);
+              max-width: 200px;
+            }
+            > img {
+              width: 100%;
+              height: auto;
+              aspect-ratio: 16 / 9;
+              object-fit: cover;
+              border-radius: $base-radius;
+            }
           }
         }
       }
@@ -95,7 +106,7 @@
       }
     }
 
-    >.jump_latest {
+    > .jump_latest {
       position: fixed;
       right: calc($base-size / 2);
       bottom: calc($base-size * 1.5);
@@ -126,6 +137,7 @@
       gap: calc($base-size / 4);
       > .img {
         width: calc((100% - ($base-size / 4) * 3) / 4);
+        max-width: 200px;
         height: auto;
         aspect-ratio: 16 / 9;
         margin: calc($base-size / 4 - 3px) 0;
@@ -170,6 +182,9 @@
         justify-content: center;
         align-items: center;
         align-self: end;
+        &:disabled {
+          color:$color-text-mute
+        }
       }
 
       > textarea {
@@ -180,7 +195,7 @@
         margin: calc(($base-size - 21px) / 2) 0;
       }
 
-      >.char_counter {
+      > .char_counter {
         position: absolute;
         display: block;
         right: $base-size + 8px;

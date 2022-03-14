@@ -7,8 +7,10 @@ import { Settings } from "../types.d"
 import { Ripple } from "@rmwc/ripple"
 import { memo } from "react"
 
-const Top = memo(() => {
+//@ts-ignore
+import defaultAvatar from "../../img/default-avatar.png"
 
+const Top = memo(() => {
   const [avatar, setAvatar] = useRecoilState(avatarState)
   const [name, setName] = useRecoilState(nameState)
 
@@ -74,11 +76,11 @@ const Top = memo(() => {
         <div className="container">
           <div className="avatar">
             <div
-              style={{ backgroundImage: `url(${avatar})` }}
+              style={{ backgroundImage: `url(${avatar || defaultAvatar})` }}
               className="img"
               role="img"
             />
-            {avatar === "../img/default-avatar.png" ? (
+            {!avatar ? (
               <Ripple>
                 <button className="btn" onClick={changeAvatar}>
                   <i>add_photo_alternate</i>
@@ -89,7 +91,7 @@ const Top = memo(() => {
                 <button
                   className="btn"
                   onClick={() => {
-                    setAvatar("../img/default-avatar.png")
+                    setAvatar("")
                     localStorage.removeItem("avatar")
                   }}
                 >

@@ -25,4 +25,6 @@ export interface Settings {
   localStorage_keep_name: boolean
   localStorage_keep_avatar: boolean
   localStorage_keep_poster_identifier: boolean
+  chat_cjp: boolean
+  chat_send_shortcut: boolean
 }
