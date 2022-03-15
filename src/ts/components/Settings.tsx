@@ -156,6 +156,7 @@ const Settings = memo(() => {
             <Ripple>
               <Link className="item" to="/onboarding">
                 <span>初回起動画面を表示</span>
+                <i>navigate_next</i>
               </Link>
             </Ripple>
           </div>
@@ -163,6 +164,7 @@ const Settings = memo(() => {
             <Ripple>
               <Link className="item" to="/opensouceliecnse">
                 <span>オープンソースライセンス</span>
+                <i>navigate_next</i>
               </Link>
             </Ripple>
           </div>
@@ -177,6 +179,18 @@ const Settings = memo(() => {
           </div>
         </div>
       </main>
+      <footer>
+        <small>
+          &copy; 2022{" "}
+          <a
+            href="https://github.com/Submarinonline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SubmarinOnline
+          </a>
+        </small>
+      </footer>
 
       <ReactModal
         isOpen={resetDialogOpen}

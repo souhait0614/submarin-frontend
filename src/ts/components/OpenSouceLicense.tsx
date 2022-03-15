@@ -5,7 +5,6 @@ import { Ripple } from "@rmwc/ripple"
 import { memo } from "react"
 
 const OpenSourceLicense = memo(() => {
-
   return (
     <div id="open_source_license">
       <Header title="オープンソースライセンス" />
@@ -25,6 +24,7 @@ const OpenSourceLicense = memo(() => {
                     <br />
                     <span className="sub_text">{val.licenses}</span>
                   </span>
+                  <i>open_in_new</i>
                 </a>
               </Ripple>
             </div>

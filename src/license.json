@@ -5,12 +5,6 @@
         "licenseUrl": "https://github.com/jamesmfriedman/rmwc",
         "parents": "submarin-frontend"
     },
-    "@rmwc/tooltip@7.0.3": {
-        "licenses": "MIT",
-        "repository": "https://github.com/jamesmfriedman/rmwc",
-        "licenseUrl": "https://github.com/jamesmfriedman/rmwc",
-        "parents": "submarin-frontend"
-    },
     "cjp@1.2.3": {
         "licenses": "MIT",
         "repository": "https://github.com/Submarinonline/cjp.js",
@@ -23,22 +17,10 @@
         "licenseUrl": "https://github.com/fengyuanchen/compressorjs/raw/master/LICENSE",
         "parents": "submarin-frontend"
     },
-    "pica@9.0.1": {
-        "licenses": "MIT",
-        "repository": "https://github.com/nodeca/pica",
-        "licenseUrl": "https://github.com/nodeca/pica/raw/master/LICENSE",
-        "parents": "submarin-frontend"
-    },
     "react-dom@17.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react",
         "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
-        "parents": "submarin-frontend"
-    },
-    "react-image-crop@9.1.1": {
-        "licenses": "ISC",
-        "repository": "https://github.com/DominicTobias/react-image-crop",
-        "licenseUrl": "https://github.com/DominicTobias/react-image-crop/raw/master/LICENSE.md",
         "parents": "submarin-frontend"
     },
     "react-images-viewer@1.7.1": {
@@ -81,12 +63,6 @@
         "licenses": "MIT",
         "repository": "https://github.com/facebookexperimental/Recoil",
         "licenseUrl": "https://github.com/facebookexperimental/Recoil/raw/master/LICENSE",
-        "parents": "submarin-frontend"
-    },
-    "use-file-picker@1.4.2": {
-        "licenses": "MIT",
-        "repository": "https://github.com/Jaaneek/useFilePicker",
-        "licenseUrl": "https://github.com/Jaaneek/useFilePicker/raw/master/LICENSE",
         "parents": "submarin-frontend"
     }
 }

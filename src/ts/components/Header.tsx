@@ -25,7 +25,7 @@ const Header = memo(
       <header style={headerStyle}>
         {removeBackBtn || backBtn || (
           <Ripple>
-            <button onClick={() => navigate(-1)}>
+            <button onClick={() => navigate(-1)} title="戻る">
               <i>arrow_back</i>
             </button>
           </Ripple>

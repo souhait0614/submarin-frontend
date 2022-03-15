@@ -151,13 +151,13 @@ const Chat = memo(() => {
                 title="オープンチャット"
                 backBtn={
                   <Ripple>
-                    <button onClick={() => setBackDialogOpen(true)}>
+                    <button onClick={() => setBackDialogOpen(true)} title="退出する">
                       <i>arrow_back</i>
                     </button>
                   </Ripple>
                 }
                 addBtn={
-                  <button onClick={() => setChatSettingModalOpen(true)}>
+                  <button onClick={() => setChatSettingModalOpen(true)} title="チャット設定を開く">
                     <i>settings</i>
                   </button>
                 }

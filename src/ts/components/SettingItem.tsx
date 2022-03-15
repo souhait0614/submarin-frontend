@@ -10,7 +10,7 @@ function SettingItem({
   return (
     <div className="item_container">
       <Ripple>
-        <label className="item">
+        <label className="item" title="設定を切り替え">
           <span>{label}</span>
           {input}
         </label>

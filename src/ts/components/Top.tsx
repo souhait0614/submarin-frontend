@@ -69,7 +69,7 @@ const Top = memo(() => {
         title="Submarin"
         removeBackBtn
         addBtn={
-          <Link to="/settings">
+          <Link to="/settings" title="設定へ移動">
             <i>settings</i>
           </Link>
         }
@@ -84,7 +84,7 @@ const Top = memo(() => {
             />
             {!avatar ? (
               <Ripple>
-                <button className="btn" onClick={changeAvatar}>
+                <button className="btn" onClick={changeAvatar} title="アバターを追加">
                   <i>add_photo_alternate</i>
                 </button>
               </Ripple>
@@ -96,6 +96,7 @@ const Top = memo(() => {
                     setAvatar("")
                     localStorage.removeItem("avatar")
                   }}
+                  title="アバターを削除"
                 >
                   <i>delete_forever</i>
                 </button>
@@ -119,6 +120,7 @@ const Top = memo(() => {
             }}
             value={name}
             placeholder="username..."
+            title="ユーザーネームを入力"
           />
         </div>
       </main>

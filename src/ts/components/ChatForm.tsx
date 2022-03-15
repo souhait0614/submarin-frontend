@@ -99,6 +99,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
                   })
                   textareaRef.current.focus()
                 }}
+                title="添付画像を削除"
               >
                 <i>close</i>
               </button>
@@ -124,6 +125,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
               textareaRef.current.focus()
             }}
             disabled={images.length >= 4}
+            title="添付画像を追加"
           >
             <i>add_photo_alternate</i>
           </button>
@@ -142,6 +144,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
             )
               post()
           }}
+          title="チャットを入力"
         />
         <Ripple>
           <button
@@ -150,6 +153,7 @@ const ChatForm = memo(({ ws, ip }: { ws: WebSocket; ip: string }) => {
               textareaRef.current.focus()
             }}
             disabled={text.trim() === "" && images.length === 0}
+            title="チャットを送信"
           >
             <i>send</i>
           </button>

@@ -15,6 +15,7 @@
     flex-direction: column-reverse;
     gap: calc($base-size / 2);
     overflow-y: scroll;
+    overflow-x: hidden;
 
     > .post {
       display: grid;
@@ -99,7 +100,8 @@
       padding: calc($base-size / 8) calc($base-size / 4);
       background-color: $color-back-mute;
       border-radius: $base-radius;
-      white-space: pre;
+      text-align: center;
+      white-space: pre-wrap;
 
       &.pri {
         color: #fff;
