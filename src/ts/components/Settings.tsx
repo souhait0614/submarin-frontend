@@ -170,8 +170,8 @@ const Settings = memo(() => {
           </div>
           <div className="item_container">
             <Ripple>
-              <Link className="item" to="/help">
-                <span>ヘルプ</span>
+              <Link className="item" to="/qa">
+                <span>よくある質問</span>
                 <i>navigate_next</i>
               </Link>
             </Ripple>
