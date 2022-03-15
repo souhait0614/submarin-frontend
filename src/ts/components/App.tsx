@@ -9,6 +9,9 @@ import Chat from "./Chat"
 import Error from "./Error"
 import OnBoarding from "./OnBoarding"
 import OpenSourceLicense from "./OpenSouceLicense"
+import { Help } from "./Help"
+import { Service } from "./Service"
+import { Policy } from "./Policy"
 
 Modal.setAppElement("#root")
 Modal.defaultStyles = {
@@ -33,6 +36,9 @@ const App = memo(() => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/onboarding" element={<OnBoarding />} />
           <Route path="/opensouceliecnse" element={<OpenSourceLicense />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/policy" element={<Policy />} />
           <Route
             path="/*"
             element={

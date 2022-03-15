@@ -168,6 +168,30 @@ const Settings = memo(() => {
               </Link>
             </Ripple>
           </div>
+          <div className="item_container">
+            <Ripple>
+              <Link className="item" to="/help">
+                <span>ヘルプ</span>
+                <i>navigate_next</i>
+              </Link>
+            </Ripple>
+          </div>
+          <div className="item_container">
+            <Ripple>
+              <Link className="item" to="/service">
+                <span>利用規約</span>
+                <i>navigate_next</i>
+              </Link>
+            </Ripple>
+          </div>
+          <div className="item_container">
+            <Ripple>
+              <Link className="item" to="/policy">
+                <span>プライバシーポリシー</span>
+                <i>navigate_next</i>
+              </Link>
+            </Ripple>
+          </div>
         </div>
         <div className="container">
           <div className="item_container">

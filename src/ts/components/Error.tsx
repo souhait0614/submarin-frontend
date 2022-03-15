@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function Error({ title = "", text = <></> }) {
+function Error({ title = "", text = <></>, noBtn = false }) {
   return (
     <main
       style={{
@@ -12,9 +12,11 @@ function Error({ title = "", text = <></> }) {
       <section style={{ display: "grid", gap: "1em" }}>
         <h2 style={{ fontSize: "1.5em" }}>{title}</h2>
         <p>{text}</p>
-        <Link to={"/"} className="btn pri">
-          トップへ
-        </Link>
+        {!noBtn && (
+          <Link to={"/"} className="btn pri">
+            トップへ
+          </Link>
+        )}
       </section>
     </main>
   )

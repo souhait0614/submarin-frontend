@@ -42,3 +42,11 @@
     }
   }
 }
+
+.btns {
+  display: flex;
+  gap: calc($base-size / 4);
+  @media screen and (max-width:450px) {
+    flex-wrap: wrap;
+  }
+}

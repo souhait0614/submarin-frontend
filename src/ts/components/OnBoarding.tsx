@@ -7,18 +7,13 @@ import Header from "./Header"
 import logo from "../../img/logo_color.png"
 
 const OnBoarding = memo(() => {
-
   return (
     <div id="onboarding">
       <Header noTitle removeBackBtn title={"Submarin"} />
       <main>
         <section>
           <h2>Submarinへようこそ</h2>
-          <img
-            className="logo"
-            src={logo}
-            alt="Submarin logo"
-          />
+          <img className="logo" src={logo} alt="Submarin logo" />
           <span style={{ fontSize: "1.5rem" }}>へようこそ。</span>
           <p>
             Submarinは不特定多数とのコミュニケーションに特化した
@@ -32,6 +27,23 @@ const OnBoarding = memo(() => {
             <br />
             <small>(アバターも設定できます)</small>
           </p>
+          <p>
+            Submarinを利用するには
+            <br />
+            利用規約、プライバシーポリシーに同意する必要があります。
+          </p>
+          <p className="btns">
+            <Ripple>
+              <Link className="btn" to="/service">
+                利用規約
+              </Link>
+            </Ripple>
+            <Ripple>
+              <Link className="btn" to="/policy">
+                プライバシーポリシー
+              </Link>
+            </Ripple>
+          </p>
         </section>
       </main>
       <footer>
@@ -41,7 +53,7 @@ const OnBoarding = memo(() => {
             className="btn pri"
             onClick={() => localStorage.setItem("first_run", "")}
           >
-            はじめる
+            同意してはじめる
           </Link>
         </Ripple>
       </footer>
