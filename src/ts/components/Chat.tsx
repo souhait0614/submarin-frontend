@@ -151,13 +151,19 @@ const Chat = memo(() => {
                 title="オープンチャット"
                 backBtn={
                   <Ripple>
-                    <button onClick={() => setBackDialogOpen(true)} title="退出する">
+                    <button
+                      onClick={() => setBackDialogOpen(true)}
+                      title="退出する"
+                    >
                       <i>arrow_back</i>
                     </button>
                   </Ripple>
                 }
                 addBtn={
-                  <button onClick={() => setChatSettingModalOpen(true)} title="チャット設定を開く">
+                  <button
+                    onClick={() => setChatSettingModalOpen(true)}
+                    title="チャット設定を開く"
+                  >
                     <i>settings</i>
                   </button>
                 }
@@ -190,7 +196,9 @@ const Chat = memo(() => {
                   <button
                     className={"jump_latest" + (hideJumpBtn ? " hide" : "")}
                     title="最新のチャットに戻る"
-                    onClick={() => (main.current.scrollTop = 0)}
+                    onClick={() =>
+                      main.current.scrollTo({ top: 0, behavior: "smooth" })
+                    }
                   >
                     <i>arrow_downward</i>
                   </button>

@@ -6,6 +6,9 @@ function ChatLogPost({ chat }: { chat: ReceiveChat }) {
       <p>
         {chat.name}が{["入室", "退室"][chat.type - 1]}しました
       </p>
+      <p className="time">
+        <time dateTime={chat.timestamp}>{chat.timestamp}</time>
+      </p>
     </div>
   )
 }

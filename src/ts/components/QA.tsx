@@ -45,6 +45,14 @@ export const QA = memo(() => {
             </p>
           </>
         </HelpItem>
+        <HelpItem label="ソースコードはどこにある？">
+          <>
+            <p>
+              <a href="https://github.com/hakunagi/submarin-frontend" target="_blank" rel="noopener noreferrer">GitHub</a>に置いてあります。
+            </p>
+            <p>NodeやYarn、Viteといったツールをインストールすればビルドすることも可能です。</p>
+          </>
+        </HelpItem>
         <HelpItem label='なんでSubmarin"e"(潜水艦)ではない？'>
           <>
             <p>大本のアプリがSubmarinだったからです。</p>

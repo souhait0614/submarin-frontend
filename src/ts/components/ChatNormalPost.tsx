@@ -35,6 +35,9 @@ function ChatNormalPost({ chat }: { chat: ReceiveChat }) {
         >
           <p className="name">{chat.name}</p>
           <p className="content">{chat.content}</p>
+          <p className="time">
+            <time dateTime={chat.timestamp}>{chat.timestamp}</time>
+          </p>
         </div>
         {chat.images.length ? (
           <div className="images_container">

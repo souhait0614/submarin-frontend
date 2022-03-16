@@ -65,6 +65,10 @@
             line-height: 1;
             opacity: 0.7;
           }
+          > .time {
+            font-size: 0.7em;
+            opacity: 0.7;
+          }
         }
         > .images_container {
           display: flex;
@@ -106,6 +110,11 @@
       &.pri {
         color: #fff;
         background-color: $color-accent;
+      }
+
+      > .time {
+        font-size: 0.7em;
+        opacity: 0.7;
       }
     }
 
